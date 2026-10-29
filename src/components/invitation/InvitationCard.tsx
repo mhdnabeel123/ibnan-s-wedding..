@@ -101,7 +101,7 @@ export const InvitationCard: React.FC = () => {
               <h2 className="font-script text-4xl sm:text-5xl md:text-6xl text-[#B08D57] drop-shadow-sm font-normal py-1">
                 {weddingData.groom.firstName} Shaik
                 {weddingData.groom.qualification && (
-                  <span className="font-serif-luxury text-base sm:text-lg text-[#581825] ml-2 font-semibold">
+                  <span className="font-serif-luxury text-base sm:text-lg text-[#B08D57] ml-2 font-semibold">
                     {weddingData.groom.qualification}
                   </span>
                 )}
@@ -145,7 +145,7 @@ export const InvitationCard: React.FC = () => {
           {/* Bride Section */}
           <motion.div {...scaleIn(0.5)} className="text-center my-6">
             <div className="inline-block relative">
-              <h2 className="font-script text-4xl sm:text-5xl md:text-6xl text-[#581825] drop-shadow-sm font-normal py-1">
+              <h2 className="font-script text-4xl sm:text-5xl md:text-6xl text-[#B08D57] drop-shadow-sm font-normal py-1">
                 {weddingData.bride.firstName} Banu
                 {weddingData.bride.qualification && (
                   <span className="font-serif-luxury text-base sm:text-lg text-[#B08D57] ml-2 font-semibold">
