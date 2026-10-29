@@ -1,0 +1,177 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+    --font-great-vibes: 'Great Vibes', cursive;
+    --font-cinzel: 'Cinzel', serif;
+    --font-jakarta: 'Plus Jakarta Sans', system-ui, sans-serif;
+
+    /* Luxury Wedding Color Palette */
+    --color-ivory: #FFFDF9;
+    --color-cream: #FAF4EB;
+    --color-champagne: #F5E6D3;
+    --color-peach: #F6D6C6;
+    --color-gold-light: #F4E2B2;
+    --color-gold: #C5A059;
+    --color-gold-dark: #9B783E;
+    --color-maroon: #581825;
+    --color-burgundy: #421019;
+    --color-espresso: #2D1A15;
+  }
+}
+
+/* Custom Typography Utilities */
+.font-script {
+  font-family: var(--font-great-vibes), 'Alex Brush', cursive;
+}
+
+.font-serif-luxury {
+  font-family: var(--font-cormorant), Garamond, Georgia, serif;
+}
+
+.font-cinzel {
+  font-family: var(--font-cinzel), 'Cinzel Decorative', Georgia, serif;
+}
+
+.font-sans-clean {
+  font-family: var(--font-jakarta), system-ui, -apple-system, sans-serif;
+}
+
+/* Gold Gradient Shimmer Effects */
+.gold-text-gradient {
+  background: linear-gradient(135deg, #D4AF37 0%, #FFF3B0 35%, #AA771C 70%, #F5DEB3 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.maroon-text-gradient {
+  background: linear-gradient(135deg, #581825 0%, #801C2E 50%, #421019 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gold-border-gradient {
+  border-image: linear-gradient(to right, #B08D57, #F4E2B2, #B08D57) 1;
+}
+
+/* Shimmer Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(212, 175, 55, 0) 0%,
+    rgba(255, 235, 170, 0.4) 50%,
+    rgba(212, 175, 55, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite linear;
+}
+
+/* Floating Particles Animation */
+@keyframes floatParticle {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-20px) rotate(180deg);
+    opacity: 0.8;
+  }
+}
+
+.animate-float-particle {
+  animation: floatParticle 8s ease-in-out infinite;
+}
+
+/* Gentle Pulse Glow */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(197, 160, 89, 0.3), 0 0 30px rgba(197, 160, 89, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(197, 160, 89, 0.6), 0 0 45px rgba(197, 160, 89, 0.3);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s ease-in-out infinite;
+}
+
+/* Royal Curtain Drapery Shadows and Fabric Folds */
+.curtain-fabric {
+  background: linear-gradient(
+    90deg,
+    #9C4035 0%,
+    #D06857 8%,
+    #BA5243 16%,
+    #E47A6A 24%,
+    #C45B4B 32%,
+    #EE8978 40%,
+    #B75042 48%,
+    #E47A6A 56%,
+    #BA5243 64%,
+    #DE7666 72%,
+    #B75042 80%,
+    #CD6655 88%,
+    #8F382E 100%
+  );
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.4), 0 15px 30px rgba(0, 0, 0, 0.35);
+}
+
+.curtain-fabric-champagne {
+  background: linear-gradient(
+    90deg,
+    #8C2637 0%,
+    #B3394E 8%,
+    #972C3E 16%,
+    #C7475F 24%,
+    #A13045 32%,
+    #D2566E 40%,
+    #972C3E 48%,
+    #C7475F 56%,
+    #9F2F43 64%,
+    #BD4057 72%,
+    #922A3C 80%,
+    #B3394E 88%,
+    #731F2E 100%
+  );
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.45), 0 15px 35px rgba(0, 0, 0, 0.4);
+}
+
+/* Golden Beaded Fringe at Valance Bottom */
+.gold-fringe {
+  background: repeating-linear-gradient(
+    90deg,
+    #D4AF37 0px,
+    #FFE599 3px,
+    #AA771C 6px,
+    transparent 6px,
+    transparent 10px
+  );
+}
+
+/* Paper Card Texture */
+.wedding-card-surface {
+  background-color: #FFFDF9;
+  background-image: 
+    radial-gradient(#F5EADB 0.75px, transparent 0.75px),
+    radial-gradient(#F0DFC9 0.75px, #FFFDF9 0.75px);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+}
+
+/* Smooth Canvas Scratch Area */
+.scratch-canvas {
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
