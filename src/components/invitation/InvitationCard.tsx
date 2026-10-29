@@ -1,23 +1,50 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React from "react";
 import { weddingData } from "@/data/wedding";
 import { FloralCorner } from "../ui/FloralCorner";
 import { DecorativeDivider } from "../ui/DecorativeDivider";
-import { Eye, MapPin, Clock, Calendar, Heart, Sparkles, X } from "lucide-react";
+import { MapPin, Clock, Heart } from "lucide-react";
+import { motion, type Easing } from "framer-motion";
+
+const EASE_OUT: Easing = "easeOut";
+
+/* ── animation helpers ── */
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 30 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.65, ease: EASE_OUT, delay },
+});
+
+const fadeIn = (delay = 0) => ({
+  initial: { opacity: 0 },
+  whileInView: { opacity: 1 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.7, delay },
+});
+
+const scaleIn = (delay = 0) => ({
+  initial: { opacity: 0, scale: 0.88 },
+  whileInView: { opacity: 1, scale: 1 },
+  viewport: { once: true, margin: "-60px" },
+  transition: { duration: 0.6, ease: EASE_OUT, delay },
+});
 
 export const InvitationCard: React.FC = () => {
-  const [showOriginalModal, setShowOriginalModal] = useState(false);
-  const [activePhoto, setActivePhoto] = useState<"cover" | "inside">("inside");
-
   return (
     <section className="relative w-full py-12 px-3 sm:px-6 md:px-8 flex flex-col items-center">
       {/* Background Glow */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-3xl h-full bg-gradient-to-b from-[#F5E6D3]/30 via-[#FDFBF7] to-[#F5E6D3]/30 rounded-3xl blur-2xl pointer-events-none" />
 
       {/* Main Wedding Invitation Card Box */}
-      <div className="relative z-10 w-full max-w-2xl bg-[#FFFDF9] rounded-2xl sm:rounded-3xl shadow-2xl border-2 border-[#D4AF37]/60 p-5 sm:p-8 md:p-12 overflow-hidden transition-all duration-500 hover:shadow-[#C5A059]/20 hover:shadow-3xl">
+      <motion.div
+        initial={{ opacity: 0, y: 50, scale: 0.96 }}
+        whileInView={{ opacity: 1, y: 0, scale: 1 }}
+        viewport={{ once: true, margin: "-80px" }}
+        transition={{ duration: 0.75, ease: EASE_OUT }}
+        className="relative z-10 w-full max-w-2xl bg-[#FFFDF9] rounded-2xl sm:rounded-3xl shadow-2xl border-2 border-[#D4AF37]/60 p-5 sm:p-8 md:p-12 overflow-hidden transition-shadow duration-500 hover:shadow-[0_25px_60px_rgba(197,160,89,0.25)]"
+      >
         {/* Subtle Watermark Monogram Background */}
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none opacity-[0.035]">
           <span className="font-cinzel text-[180px] sm:text-[240px] font-bold text-[#801C2E]">
@@ -33,20 +60,21 @@ export const InvitationCard: React.FC = () => {
 
         {/* Inner Delicate Inset Border */}
         <div className="border border-[#C5A059]/40 rounded-xl p-4 sm:p-6 md:p-8 relative">
+
           {/* Top Arabic Bismillah Calligraphy */}
-          <div className="text-center mb-4">
+          <motion.div {...fadeIn(0.1)} className="text-center mb-4">
             <p className="font-serif-luxury text-2xl sm:text-3xl font-normal text-[#581825] tracking-wide">
               {weddingData.ceremony.bismillahArabic}
             </p>
             <p className="font-serif-luxury italic text-xs sm:text-sm text-[#7A6050] mt-1 tracking-wider">
               {weddingData.ceremony.bismillahEnglish}
             </p>
-          </div>
+          </motion.div>
 
           <DecorativeDivider variant="maroon" className="my-3 opacity-75" />
 
           {/* Host Information */}
-          <div className="text-center my-4">
+          <motion.div {...fadeUp(0.2)} className="text-center my-4">
             <p className="font-cinzel text-base sm:text-lg md:text-xl font-bold tracking-wider text-[#581825]">
               {weddingData.groom.parents}
             </p>
@@ -58,17 +86,17 @@ export const InvitationCard: React.FC = () => {
             <p className="font-sans-clean text-[11px] sm:text-xs text-[#9E8270] mt-0.5">
               Cell : {weddingData.rsvp.phone}
             </p>
-          </div>
+          </motion.div>
 
           {/* Cordial Invitation Text */}
-          <div className="text-center max-w-lg mx-auto my-5">
+          <motion.div {...fadeUp(0.3)} className="text-center max-w-lg mx-auto my-5">
             <p className="font-serif-luxury text-base sm:text-lg md:text-xl text-[#3A2218] leading-relaxed italic">
               &ldquo;{weddingData.ceremony.invitationMessage}&rdquo;
             </p>
-          </div>
+          </motion.div>
 
           {/* Groom Section */}
-          <div className="text-center my-6">
+          <motion.div {...scaleIn(0.35)} className="text-center my-6">
             <div className="inline-block relative">
               <h2 className="font-script text-4xl sm:text-5xl md:text-6xl text-[#B08D57] drop-shadow-sm font-normal py-1">
                 {weddingData.groom.firstName} Shaik
@@ -94,21 +122,28 @@ export const InvitationCard: React.FC = () => {
                 </p>
               )}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Elegant Ornate "& and &" Separator */}
-          <div className="flex items-center justify-center gap-3 my-4">
+          {/* Elegant "and" Separator */}
+          <motion.div
+            {...fadeIn(0.45)}
+            className="flex items-center justify-center gap-3 my-4"
+          >
             <div className="h-[1px] w-16 sm:w-24 bg-gradient-to-r from-transparent via-[#C5A059] to-transparent" />
-            <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF4EB] border border-[#C5A059]/40">
+            <motion.div
+              animate={{ scale: [1, 1.12, 1] }}
+              transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
+              className="flex items-center gap-2 px-3 py-1 rounded-full bg-[#FAF4EB] border border-[#C5A059]/40"
+            >
               <Heart className="w-3.5 h-3.5 text-[#801C2E] fill-[#801C2E]" />
               <span className="font-script text-xl sm:text-2xl text-[#801C2E]">and</span>
               <Heart className="w-3.5 h-3.5 text-[#801C2E] fill-[#801C2E]" />
-            </div>
+            </motion.div>
             <div className="h-[1px] w-16 sm:w-24 bg-gradient-to-r from-transparent via-[#C5A059] to-transparent" />
-          </div>
+          </motion.div>
 
           {/* Bride Section */}
-          <div className="text-center my-6">
+          <motion.div {...scaleIn(0.5)} className="text-center my-6">
             <div className="inline-block relative">
               <h2 className="font-script text-4xl sm:text-5xl md:text-6xl text-[#581825] drop-shadow-sm font-normal py-1">
                 {weddingData.bride.firstName} Banu
@@ -134,17 +169,24 @@ export const InvitationCard: React.FC = () => {
                 </p>
               )}
             </div>
-          </div>
+          </motion.div>
 
           {/* Insha Allah Badge */}
-          <div className="text-center my-5">
-            <span className="inline-block font-cinzel text-xs sm:text-sm tracking-[0.25em] text-[#801C2E] font-bold px-4 py-1 border-y border-[#D4AF37]/50 uppercase">
+          <motion.div {...fadeIn(0.55)} className="text-center my-5">
+            <motion.span
+              whileHover={{ letterSpacing: "0.3em", transition: { duration: 0.3 } }}
+              className="inline-block font-cinzel text-xs sm:text-sm tracking-[0.25em] text-[#801C2E] font-bold px-4 py-1 border-y border-[#D4AF37]/50 uppercase cursor-default"
+            >
               {weddingData.ceremony.inshaAllahText}
-            </span>
-          </div>
+            </motion.span>
+          </motion.div>
 
           {/* Date, Timing & Venue Highlight Bar */}
-          <div className="my-6 p-4 sm:p-5 rounded-xl bg-gradient-to-b from-[#FAF4EB] to-[#F5E6D3]/60 border border-[#D4AF37]/50 text-center">
+          <motion.div
+            {...scaleIn(0.6)}
+            whileHover={{ scale: 1.015, transition: { duration: 0.25 } }}
+            className="my-6 p-4 sm:p-5 rounded-xl bg-gradient-to-b from-[#FAF4EB] to-[#F5E6D3]/60 border border-[#D4AF37]/50 text-center"
+          >
             {/* Date */}
             <div className="flex flex-wrap items-center justify-center gap-2 font-cinzel text-sm sm:text-base md:text-lg font-bold text-[#581825] uppercase tracking-wider">
               <span>MONDAY</span>
@@ -170,96 +212,19 @@ export const InvitationCard: React.FC = () => {
                 {weddingData.ceremony.venueAddress}
               </p>
             </div>
-          </div>
+          </motion.div>
 
           {/* Emotional Invitation Tagline & Best Compliments */}
-          <div className="text-center pt-2 pb-1">
+          <motion.div {...fadeUp(0.7)} className="text-center pt-2 pb-1">
             <p className="font-script text-xl sm:text-2xl text-[#801C2E]">
               &ldquo;{weddingData.ceremony.tagline}&rdquo;
             </p>
             <p className="font-serif-luxury text-xs sm:text-sm text-[#8C6D58] mt-2 tracking-wider">
               {weddingData.ceremony.bestCompliments}
             </p>
-          </div>
+          </motion.div>
         </div>
-
-        {/* Modal Trigger: View Original Wedding Card */}
-        <div className="mt-6 flex justify-center">
-          <button
-            onClick={() => setShowOriginalModal(true)}
-            className="inline-flex items-center gap-2 text-xs font-sans-clean font-medium text-[#7A6050] hover:text-[#581825] bg-[#FAF4EB] hover:bg-[#F5E6D3] px-4 py-2 rounded-full border border-[#C5A059]/40 transition-colors cursor-pointer shadow-sm"
-          >
-            <Eye className="w-3.5 h-3.5 text-[#C5A059]" />
-            <span>View Original Printed Card Scan</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Original Wedding Card Modal */}
-      {showOriginalModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
-          <div className="relative w-full max-w-2xl bg-[#FFFDF9] rounded-2xl shadow-2xl p-4 sm:p-6 border border-[#C5A059] flex flex-col max-h-[92vh]">
-            {/* Header */}
-            <div className="flex items-center justify-between pb-3 border-b border-[#C5A059]/30">
-              <div>
-                <h3 className="font-cinzel text-base sm:text-lg font-bold text-[#581825]">
-                  Original Printed Wedding Card
-                </h3>
-                <p className="text-xs text-[#7A6050] font-serif-luxury">
-                  Authentic physical invitation for Ibnan & Tanziya
-                </p>
-              </div>
-              <button
-                onClick={() => setShowOriginalModal(false)}
-                className="p-1.5 rounded-full hover:bg-gray-100 text-gray-500 hover:text-gray-800 transition-colors cursor-pointer"
-                aria-label="Close modal"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            {/* Photo Tabs */}
-            <div className="flex gap-2 my-3">
-              <button
-                onClick={() => setActivePhoto("inside")}
-                className={`flex-1 py-1.5 text-xs font-cinzel rounded-md transition-colors cursor-pointer ${
-                  activePhoto === "inside"
-                    ? "bg-[#581825] text-white font-semibold"
-                    : "bg-[#FAF4EB] text-[#581825] border border-[#C5A059]/30"
-                }`}
-              >
-                Inside Card Details
-              </button>
-              <button
-                onClick={() => setActivePhoto("cover")}
-                className={`flex-1 py-1.5 text-xs font-cinzel rounded-md transition-colors cursor-pointer ${
-                  activePhoto === "cover"
-                    ? "bg-[#581825] text-white font-semibold"
-                    : "bg-[#FAF4EB] text-[#581825] border border-[#C5A059]/30"
-                }`}
-              >
-                Front Cover & Monogram
-              </button>
-            </div>
-
-            {/* Photo Preview Container */}
-            <div className="relative flex-1 min-h-[350px] sm:min-h-[460px] overflow-auto rounded-xl bg-black/5 flex items-center justify-center border border-[#C5A059]/20">
-              <Image
-                src={
-                  activePhoto === "inside"
-                    ? weddingData.media.insideCardImage
-                    : weddingData.media.coverCardImage
-                }
-                alt="Original Wedding Card"
-                width={800}
-                height={1000}
-                className="max-h-[70vh] w-auto object-contain rounded-lg shadow"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      )}
+      </motion.div>
     </section>
   );
 };

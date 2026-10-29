@@ -120,20 +120,7 @@ export const weddingData: WeddingData = {
       description: "Join us for an evening of celebration, heartfelt prayers, and a sumptuous royal banquet dinner.",
       isMainEvent: true,
     },
-    {
-      id: "nikah",
-      name: "Nikah Ceremony",
-      subtitle: "Solemnization of Marriage",
-      date: "16th November 2026",
-      dayOfWeek: "Monday",
-      time: "11:30 AM",
-      venue: "Grand Occasion Hall",
-      address: "Mysore, Karnataka",
-      mapsUrl: "https://maps.google.com/?q=Mysore,+Karnataka",
-      dressCode: "Traditional Attire",
-      description: "The sacred union and vows in accordance with Islamic tradition, seeking divine blessings.",
-      isMainEvent: false,
-    },
+
   ],
   rsvp: {
     deadlineDate: "November 10, 2026",
