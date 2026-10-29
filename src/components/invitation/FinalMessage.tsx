@@ -88,7 +88,7 @@ export const FinalMessage: React.FC = () => {
             {weddingData.website.hashtag}
           </p>
           <p className="text-[11px]">
-            Designed with love & prayers for Ibnan & Tanziya
+            With love by <span className="font-cinzel font-semibold text-[#B08D57]">Mohammed Nabeel N H</span>
           </p>
         </div>
       </div>
